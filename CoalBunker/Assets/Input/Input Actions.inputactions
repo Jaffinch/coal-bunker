@@ -1,0 +1,60 @@
+{
+    "name": "Input Actions",
+    "maps": [
+        {
+            "name": "Keyboard",
+            "id": "85155a25-deb6-4b15-acc2-380bd2a57358",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "6acd5b35-9b85-4c66-a8a1-1e7fbb3097b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fa0583f3-9a6c-4676-a638-55c1469da4d8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "id": "672e98ec-8d3a-4fe6-a79b-f889fce568e7",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "db157c8a-429b-4ac0-9514-d03a774c155c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c829d2c2-f173-420b-ac56-912c286a999b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
