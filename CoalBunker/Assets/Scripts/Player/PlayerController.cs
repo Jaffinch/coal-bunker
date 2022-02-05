@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private float directionX;
     private float directionY;
 
-
     private void LateUpdate()
     {
         transform.Translate(directionX * moveSpeed * Time.deltaTime, directionY * moveSpeed * Time.deltaTime, 0);
@@ -23,12 +22,6 @@ public class PlayerController : MonoBehaviour
 
         directionX =  moveDirection.x;
         directionY =  moveDirection.y;
-
     }
-
-   
-
-
-
-
+    
 }
