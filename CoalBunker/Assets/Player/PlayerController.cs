@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
+        controller.CheckCollisions();
     }
 
     private void LateUpdate()

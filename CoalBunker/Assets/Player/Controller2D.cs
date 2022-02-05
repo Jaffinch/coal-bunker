@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(PolygonCollider2D))]
 public class Controller2D : MonoBehaviour
 {
     const float skinWidth = 0.02f;
@@ -14,18 +14,19 @@ public class Controller2D : MonoBehaviour
     float horizontalRaySpacing;
     float verticalRaySpacing;
 
-    BoxCollider2D boxCollider;
+    PolygonCollider2D polyCollider;
     RaycastOrigins raycastOrigins;
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        polyCollider = GetComponent<PolygonCollider2D>();
         CalculateRaySpacing();
     }
 
     public void CheckCollisions()
     {
         UpdateRaycastOrigins();
+        VerticalCollisions();
     }
 
     void VerticalCollisions()
@@ -40,7 +41,7 @@ public class Controller2D : MonoBehaviour
     void UpdateRaycastOrigins()
     {
         //gets the size of our collider
-        Bounds bounds = boxCollider.bounds;
+        Bounds bounds = polyCollider.bounds;
         bounds.Expand(skinWidth * -2);
 
         //gets the position of the corners of our collider
@@ -54,7 +55,7 @@ public class Controller2D : MonoBehaviour
     void CalculateRaySpacing()
     {
         //gets the size of our collider
-        Bounds bounds = boxCollider.bounds;
+        Bounds bounds = polyCollider.bounds;
         bounds.Expand(skinWidth * -2);
 
         //Set the number of rays to at least 2
