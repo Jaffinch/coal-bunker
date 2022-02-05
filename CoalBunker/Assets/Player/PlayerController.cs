@@ -29,7 +29,15 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         //move player
-        transform.Translate(directionX * moveSpeed * Time.deltaTime, directionY * moveSpeed * Time.deltaTime, 0);
+        if ((directionX > 0 || directionX < 0) && (directionY > 0 || directionY < 0))
+        {
+            transform.Translate(directionX * moveSpeed * Time.deltaTime, directionY * moveSpeed * Time.deltaTime/2, 0);
+        }
+        else
+        {
+            transform.Translate(directionX * moveSpeed * Time.deltaTime * 0.75f, directionY * moveSpeed * Time.deltaTime * 0.75f, 0);
+        }
+        
     }
 
     public void Move(InputAction.CallbackContext value)
