@@ -8,45 +8,179 @@ public class Controller2D : MonoBehaviour
  
 
     //num of rays to cast
-    public int horizontalRayCount = 3;
-    public int verticalRayCount = 3;
+    public int rayCount;
+    public float rayLength;
+    public Vector2 rayOrigin;
+    public Vector2 rayDirection;
+    public LayerMask collisionMask;
 
-    float horizontalRaySpacing;
-    float verticalRaySpacing;
 
     PolygonCollider2D polyCollider;
+
     RaycastOrigins raycastOrigins;
+    Vector2Diagonals v2Diags;
 
     private void Start()
     {
         polyCollider = GetComponent<PolygonCollider2D>();
-        CalculateRaySpacing();
+
+        v2Diags.downLeft = (Vector2.down + Vector2.left + Vector2.left).normalized;
+        v2Diags.downRight = (Vector2.down + Vector2.right + Vector2.right).normalized;
+        v2Diags.upLeft = (Vector2.up + Vector2.left + Vector2.left).normalized;
+        v2Diags.upRight = (Vector2.up + Vector2.right + Vector2.right).normalized;
     }
 
-    public void CheckCollisions()
+    public void CheckCollisions(Vector2 velocity)
     {
         UpdateRaycastOrigins();
-        VerticalCollisions();
+        SetRaycastStartVariables(velocity);
+        RaycastCollisions(ref velocity);
+        MovePlayer(velocity);
     }
 
-    void VerticalCollisions()
+
+    void MovePlayer(Vector2 velocity)
     {
-        Debug.DrawRay(raycastOrigins.midBot, (Vector2.up + Vector2.left + Vector2.left).normalized * -2, Color.red);
-        Debug.DrawRay(raycastOrigins.midBot, (Vector2.up + Vector2.right + Vector2.right).normalized * -2, Color.red);
-        Debug.DrawRay(raycastOrigins.midTop, (Vector2.down + Vector2.left + Vector2.left).normalized * -2, Color.red);
-        Debug.DrawRay(raycastOrigins.midTop, (Vector2.down + Vector2.right + Vector2.right).normalized * -2, Color.red);
-        Debug.DrawRay(raycastOrigins.midRight, (Vector2.down + Vector2.left + Vector2.left).normalized * -2, Color.red);
-        Debug.DrawRay(raycastOrigins.midRight, (Vector2.up + Vector2.left + Vector2.left).normalized * -2, Color.red);
-        Debug.DrawRay(raycastOrigins.midLeft, (Vector2.down + Vector2.right + Vector2.right).normalized * -2, Color.red);
-        Debug.DrawRay(raycastOrigins.midLeft, (Vector2.up + Vector2.right + Vector2.right).normalized * -2, Color.red);
+        
+        transform.Translate(velocity);
+    }
 
+    void SetRaycastStartVariables(Vector2 velocity)
+    {
 
-        /*for (int i = 0; i < verticalRayCount; i++)
+        //ray origin and direction
+        //1 o clock
+        if(velocity.x > 0 && velocity.y > 0)
         {
-            Debug.DrawRay((raycastOrigins.botRight + raycastOrigins.botLeft)/2 + (Vector2.up + Vector2.right + Vector2.right).normalized * verticalRaySpacing * i, (Vector2.up + Vector2.right + Vector2.right).normalized * -2, Color.red);
-            
-            //Debug.DrawRay(raycastOrigins.botLeft + (Vector2.up + Vector2.right).normalized * horizontalRaySpacing * i, (Vector2.up + Vector2.right).normalized * -2, Color.red);
-        }*/
+            rayOrigin = raycastOrigins.midTop;
+            rayDirection = v2Diags.upRight;
+            rayCount = 2;
+        }
+        //3 o clock
+        else if(velocity.x > 0 && velocity.y == 0)
+        {
+            rayOrigin = raycastOrigins.midTop;
+            rayDirection = v2Diags.upRight;
+            rayCount = 4;
+
+        }
+        //4 o clock
+        else if(velocity.x > 0 && velocity.y < 0)
+        {
+            rayOrigin = raycastOrigins.midRight;
+            rayDirection = v2Diags.downRight;
+            rayCount = 2;
+        }
+        //6 o clock
+        else if(velocity.x == 0 && velocity.y < 0)
+        {
+            rayOrigin = raycastOrigins.midRight;
+            rayDirection = v2Diags.downRight;
+            rayCount = 4;
+        }
+        //7 o clock
+        else if (velocity.x < 0 && velocity.y < 0)
+        {
+            rayOrigin = raycastOrigins.midBot;
+            rayDirection = v2Diags.downLeft;
+            rayCount = 2;
+        }
+        //9 o clock
+        else if (velocity.x < 0 && velocity.y == 0)
+        {
+            rayOrigin = raycastOrigins.midBot;
+            rayDirection = v2Diags.downLeft;
+            rayCount = 4;
+        }
+        //10 o clock
+        else if (velocity.x < 0 && velocity.y > 0)
+        {
+            rayOrigin = raycastOrigins.midLeft;
+            rayDirection = v2Diags.upLeft;
+            rayCount = 2;
+        }
+        //12 o clock
+        else if (velocity.x == 0 && velocity.y > 0)
+        {
+            rayOrigin = raycastOrigins.midLeft;
+            rayDirection = v2Diags.upLeft;
+            rayCount = 4;
+        }
+        else
+        {
+            rayCount = 0;
+        }
+
+
+    }
+
+    void RaycastCollisions(ref Vector2 velocity)
+    {
+        float directionX = Mathf.Sign(velocity.x); ;
+        float directionY = Mathf.Sign(velocity.y); ;
+
+        rayLength = (Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y)) ? Mathf.Abs(velocity.x) : Mathf.Abs(velocity.y);
+ 
+        for (int i = 0; i < rayCount; i++)
+        {
+            Debug.DrawRay(rayOrigin, rayDirection, Color.red);
+
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, rayLength, collisionMask);
+            if (hit)
+            {
+                velocity.x = 0;
+                velocity.y = 0;
+                rayLength = hit.distance;
+            }
+
+            SetNextRay(i);
+        }
+
+    }
+
+    void SetNextRay(int i)
+    {
+        if(i == 1)
+        {
+            if(rayDirection == v2Diags.downLeft)
+            {
+                rayDirection = v2Diags.upLeft;
+            }
+            else if(rayDirection == v2Diags.upLeft)
+            {
+                rayDirection = v2Diags.upRight;
+            }
+            else if (rayDirection == v2Diags.upRight)
+            {
+                rayDirection = v2Diags.downRight;
+            }
+            else if (rayDirection == v2Diags.downRight)
+            {
+                rayDirection = v2Diags.downLeft;
+            }
+        }
+        else
+        {
+            if (rayOrigin == raycastOrigins.midBot)
+            {
+                rayOrigin = raycastOrigins.midLeft;
+            }
+            else if (rayOrigin == raycastOrigins.midLeft)
+            {
+                rayOrigin = raycastOrigins.midTop;
+            }
+            else if (rayOrigin == raycastOrigins.midTop)
+            {
+                rayOrigin = raycastOrigins.midRight;
+            }
+            else if (rayOrigin == raycastOrigins.midRight)
+            {
+                rayOrigin = raycastOrigins.midBot;
+            }
+        }
+
+        
+
     }
 
     void UpdateRaycastOrigins()
@@ -55,49 +189,32 @@ public class Controller2D : MonoBehaviour
         //gets the size of our collider
         Bounds bounds = polyCollider.bounds;
 
-        //gets the position of the corners of our collider
-        raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
-        raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
-        raycastOrigins.botLeft = new Vector2(bounds.min.x, bounds.min.y);
-        raycastOrigins.botRight = new Vector2(bounds.max.x, bounds.min.y);
+        //find the mid points of collider bounds
+        raycastOrigins.midBot = new Vector2(bounds.max.x + ((bounds.min.x - bounds.max.x) /2), bounds.min.y);
+        raycastOrigins.midTop = new Vector2(bounds.max.x + ((bounds.min.x - bounds.max.x) / 2), bounds.max.y);
+        raycastOrigins.midRight = new Vector2(bounds.max.x, bounds.max.y + ((bounds.min.y - bounds.max.y) / 2));
+        raycastOrigins.midLeft = new Vector2(bounds.min.x, bounds.max.y + ((bounds.min.y - bounds.max.y) / 2));
 
-        raycastOrigins.midBot = new Vector2(raycastOrigins.botRight.x + ((raycastOrigins.botLeft.x - raycastOrigins.botRight.x)/2), raycastOrigins.botLeft.y);
-        raycastOrigins.midTop = new Vector2(raycastOrigins.topRight.x + ((raycastOrigins.topLeft.x - raycastOrigins.topRight.x) / 2), raycastOrigins.topLeft.y);
-        raycastOrigins.midRight = new Vector2(raycastOrigins.topRight.x, raycastOrigins.topRight.y + ((raycastOrigins.botRight.y - raycastOrigins.topRight.y) / 2));
-        raycastOrigins.midLeft = new Vector2(raycastOrigins.topLeft.x, raycastOrigins.topLeft.y + ((raycastOrigins.botLeft.y - raycastOrigins.topLeft.y) / 2));
-
-
+        /*
         Debug.DrawRay(raycastOrigins.botLeft, Vector2.up, Color.green);
         Debug.DrawRay(raycastOrigins.topLeft, Vector2.right, Color.green);
         Debug.DrawRay(raycastOrigins.topRight, Vector2.down, Color.green);
         Debug.DrawRay(raycastOrigins.botRight, Vector2.left, Color.green);
-
+        */
     }
 
-
-    void CalculateRaySpacing()
-    {
-        //gets the size of our collider
-        Bounds bounds = polyCollider.bounds;
-
-
-        //Set the number of rays to at least 2
-        horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
-        verticalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
-
-        //set distance between rays
-        horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
-        verticalRaySpacing = bounds.size.x / (verticalRayCount- 1);
-
-    }
 
     //box collider co-ordinates
     struct RaycastOrigins
     {
-        public Vector2 topLeft, topRight;
-        public Vector2 botLeft, botRight;
+        public Vector2 midBot, midTop, midLeft, midRight;
 
-        public Vector2 midBot, midTop;
-        public Vector2 midLeft, midRight;
     }
+
+    struct Vector2Diagonals
+    {
+        public Vector2 upLeft, upRight, downLeft, downRight;
+    }
+
+
 }

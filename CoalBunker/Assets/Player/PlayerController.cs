@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent (typeof (Controller2D))]
 public class PlayerController : MonoBehaviour
 {
-
+    Vector2 velocity;
     private float moveSpeed = 1f;
     private float directionX;
     private float directionY;
@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     //temps to be deleted
     private float prevX;
     private float prevY;
-
-    Vector2 velocity;
 
     //physics scripts
     Controller2D controller;
@@ -29,7 +27,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        controller.CheckCollisions();
+        if ((directionX > 0 || directionX < 0) && (directionY > 0 || directionY < 0))
+        {
+            velocity.x = directionX * moveSpeed * Time.deltaTime;
+            velocity.y = directionY * moveSpeed * Time.deltaTime / 2;
+        }
+        else
+        {
+            velocity.x = directionX * moveSpeed * Time.deltaTime * 0.75f;
+            velocity.y = directionY * moveSpeed * Time.deltaTime * 0.75f;
+        }
+
+
+        controller.CheckCollisions(velocity);
     }
 
     private void LateUpdate()
@@ -49,7 +59,7 @@ public class PlayerController : MonoBehaviour
         }
         
 
-
+        /*
         //move player
         if ((directionX > 0 || directionX < 0) && (directionY > 0 || directionY < 0))
         {
@@ -59,13 +69,15 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(directionX * moveSpeed * Time.deltaTime * 0.75f, directionY * moveSpeed * Time.deltaTime * 0.75f, 0);
         }
-        
+        */
     }
 
     public void Move(InputAction.CallbackContext value)
     {
         Vector2 moveDirection = value.ReadValue<Vector2>();
 
+        
+            
         directionX =  moveDirection.x;
         directionY =  moveDirection.y;
 
