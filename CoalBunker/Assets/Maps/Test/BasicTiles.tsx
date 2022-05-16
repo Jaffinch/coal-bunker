@@ -3,29 +3,29 @@
  <image source="BasicTiles.png" width="500" height="500"/>
  <tile id="1">
   <objectgroup draworder="index" id="2">
-   <object id="1" x="0.979904" y="48.0153">
-    <polygon points="-0.734928,-0.122488 31.112,-16.1684 45.688,-8.81914 13.7187,7.34928"/>
+   <object id="1" x="0.808744" y="48.4039">
+    <polygon points="-0.804348,-0.40321 31.2325,-16.4046 46.1717,-8.92172 14.1624,7.11315"/>
    </object>
   </objectgroup>
  </tile>
  <tile id="2">
   <objectgroup draworder="index" id="2">
    <object id="1" x="32.0919" y="32.3368">
-    <polygon points="-0.122488,-0.489952 31.4794,15.556 16.7809,23.1502 -15.066,6.98182"/>
+    <polygon points="-0.122488,-0.396202 31.9091,15.6497 16.7809,23.1502 -15.0348,7.13807"/>
    </object>
   </objectgroup>
  </tile>
  <tile id="3">
   <objectgroup draworder="index" id="2">
-   <object id="1" x="15.066" y="55.4871">
-    <polygon points="0,0 -14.5761,-7.47177 16.9033,-23.6402 48.6278,-7.59426 33.8067,-0.244976 17.0258,-8.08421"/>
+   <object id="1" x="14.8001" y="55.4871">
+    <polygon points="0.190568,0.0222222 -14.7648,-7.47177 17.1554,-23.4846 49.224,-7.46093 34.1522,0.005024 17.1829,-8.52171"/>
    </object>
   </objectgroup>
  </tile>
  <tile id="4">
   <objectgroup draworder="index" id="2">
-   <object id="1" x="32.2144" y="32.3368">
-    <polygon points="-0.122488,-0.61244 14.5761,6.85933 0,14.2086 -15.066,7.10431"/>
+   <object id="1" x="32.2196" y="32.3497">
+    <polygon points="-0.212027,-0.45144 14.753,7.13439 -0.347826,14.6386 -15.1663,7.12367"/>
    </object>
   </objectgroup>
  </tile>

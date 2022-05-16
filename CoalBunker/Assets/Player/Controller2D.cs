@@ -128,6 +128,9 @@ public class Controller2D : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, rayLength, collisionMask);
             if (hit)
             {
+      
+                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+                Debug.Log(slopeAngle);
                 velocity.x = 0;
                 velocity.y = 0;
                 rayLength = hit.distance;
@@ -188,6 +191,7 @@ public class Controller2D : MonoBehaviour
         
         //gets the size of our collider
         Bounds bounds = polyCollider.bounds;
+        bounds.Expand(.035f);
 
         //find the mid points of collider bounds
         raycastOrigins.midBot = new Vector2(bounds.max.x + ((bounds.min.x - bounds.max.x) /2), bounds.min.y);

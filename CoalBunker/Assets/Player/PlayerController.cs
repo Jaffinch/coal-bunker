@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     Vector2 velocity;
-    private float moveSpeed = 1f;
+    private float moveSpeed = 100f;
     private float directionX;
     private float directionY;
 
