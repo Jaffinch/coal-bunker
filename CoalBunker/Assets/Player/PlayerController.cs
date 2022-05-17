@@ -7,13 +7,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     Vector2 velocity;
-    private float moveSpeed = 100f;
-    private float directionX;
-    private float directionY;
+    private float moveSpeed = 3f;
 
-    //temps to be deleted
-    private float prevX;
-    private float prevY;
 
     //physics scripts
     Controller2D controller;
@@ -27,22 +22,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if ((directionX > 0 || directionX < 0) && (directionY > 0 || directionY < 0))
-        {
-            velocity.x = directionX * moveSpeed * Time.deltaTime;
-            velocity.y = directionY * moveSpeed * Time.deltaTime / 2;
-        }
-        else
-        {
-            velocity.x = directionX * moveSpeed * Time.deltaTime * 0.75f;
-            velocity.y = directionY * moveSpeed * Time.deltaTime * 0.75f;
-        }
 
+        controller.Move(velocity * Time.deltaTime);
 
-        controller.CheckCollisions(velocity);
     }
 
-    private void LateUpdate()
+    
+
+    public void GetMovementInput(InputAction.CallbackContext value)
+    {
+        Vector2 inputDirection = value.ReadValue<Vector2>();
+        velocity.x = inputDirection.x * moveSpeed;
+        velocity.y = inputDirection.y * moveSpeed;
+
+    }
+
+
+    /*private void LateUpdate()
     {
         if(directionX == 0 && directionY == 0)
         {
@@ -58,33 +54,7 @@ public class PlayerController : MonoBehaviour
 
         }
         
-
-        /*
-        //move player
-        if ((directionX > 0 || directionX < 0) && (directionY > 0 || directionY < 0))
-        {
-            transform.Translate(directionX * moveSpeed * Time.deltaTime, directionY * moveSpeed * Time.deltaTime/2, 0);
-        }
-        else
-        {
-            transform.Translate(directionX * moveSpeed * Time.deltaTime * 0.75f, directionY * moveSpeed * Time.deltaTime * 0.75f, 0);
-        }
-        */
-    }
-
-    public void Move(InputAction.CallbackContext value)
-    {
-        Vector2 moveDirection = value.ReadValue<Vector2>();
-
-        
-            
-        directionX =  moveDirection.x;
-        directionY =  moveDirection.y;
-
-    }
-
-   
-
+    }*/
 
 
 

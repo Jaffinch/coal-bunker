@@ -2,223 +2,158 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class Controller2D : MonoBehaviour
 {
- 
+    BoxCollider2D boxCollider;
 
-    //num of rays to cast
-    public int rayCount;
-    public float rayLength;
-    public Vector2 rayOrigin;
-    public Vector2 rayDirection;
-    public LayerMask collisionMask;
+    public IsoPlayerController isoController;
 
-
-    PolygonCollider2D polyCollider;
-
+    //struct to store corners of box collider
     RaycastOrigins raycastOrigins;
-    Vector2Diagonals v2Diags;
+
+    //the indent into the box collider
+    const float skinWidth = .0001f;
+
+    //number of rays to cast
+    public int horizontalRayCount = 4;
+    public int verticalRayCount = 4;
+
+    float horizontalRaySpacing;
+    float verticalRaySpacing;
+
+    public LayerMask collisionMask;
+    public CollisionInfo collisionInfo;
+
 
     private void Start()
     {
-        polyCollider = GetComponent<PolygonCollider2D>();
-
-        v2Diags.downLeft = (Vector2.down + Vector2.left + Vector2.left).normalized;
-        v2Diags.downRight = (Vector2.down + Vector2.right + Vector2.right).normalized;
-        v2Diags.upLeft = (Vector2.up + Vector2.left + Vector2.left).normalized;
-        v2Diags.upRight = (Vector2.up + Vector2.right + Vector2.right).normalized;
+        boxCollider = GetComponent <BoxCollider2D>();
+        CalcuclateRaySpacing();
     }
 
-    public void CheckCollisions(Vector2 velocity)
+   
+    public void Move(Vector2 velocity)
     {
         UpdateRaycastOrigins();
-        SetRaycastStartVariables(velocity);
-        RaycastCollisions(ref velocity);
-        MovePlayer(velocity);
-    }
+        collisionInfo.Reset();
+
+        if (velocity.x != 0)
+        {
+            HorizontalCollisions(ref velocity);
+        }
+        else
+        {
+            velocity.y /= 1.5f;
+        }
+        if(velocity.y != 0)
+        {
+            VerticalCollisions(ref velocity);
+        }
+        else
+        {
+            velocity.x /= 1.5f;
+        }
 
 
-    void MovePlayer(Vector2 velocity)
-    {
+        isoController.IsometricMove(velocity);
         
         transform.Translate(velocity);
     }
 
-    void SetRaycastStartVariables(Vector2 velocity)
+    void VerticalCollisions(ref Vector2 velocity)
     {
+        float directionY = Mathf.Sign(velocity.y);
+        float rayLength = Mathf.Abs(velocity.y * 10) + skinWidth; 
 
-        //ray origin and direction
-        //1 o clock
-        if(velocity.x > 0 && velocity.y > 0)
+        for (int i = 0; i < verticalRayCount; i++)
         {
-            rayOrigin = raycastOrigins.midTop;
-            rayDirection = v2Diags.upRight;
-            rayCount = 2;
-        }
-        //3 o clock
-        else if(velocity.x > 0 && velocity.y == 0)
-        {
-            rayOrigin = raycastOrigins.midTop;
-            rayDirection = v2Diags.upRight;
-            rayCount = 4;
+            Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.botLeft : raycastOrigins.topLeft;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i);
 
-        }
-        //4 o clock
-        else if(velocity.x > 0 && velocity.y < 0)
-        {
-            rayOrigin = raycastOrigins.midRight;
-            rayDirection = v2Diags.downRight;
-            rayCount = 2;
-        }
-        //6 o clock
-        else if(velocity.x == 0 && velocity.y < 0)
-        {
-            rayOrigin = raycastOrigins.midRight;
-            rayDirection = v2Diags.downRight;
-            rayCount = 4;
-        }
-        //7 o clock
-        else if (velocity.x < 0 && velocity.y < 0)
-        {
-            rayOrigin = raycastOrigins.midBot;
-            rayDirection = v2Diags.downLeft;
-            rayCount = 2;
-        }
-        //9 o clock
-        else if (velocity.x < 0 && velocity.y == 0)
-        {
-            rayOrigin = raycastOrigins.midBot;
-            rayDirection = v2Diags.downLeft;
-            rayCount = 4;
-        }
-        //10 o clock
-        else if (velocity.x < 0 && velocity.y > 0)
-        {
-            rayOrigin = raycastOrigins.midLeft;
-            rayDirection = v2Diags.upLeft;
-            rayCount = 2;
-        }
-        //12 o clock
-        else if (velocity.x == 0 && velocity.y > 0)
-        {
-            rayOrigin = raycastOrigins.midLeft;
-            rayDirection = v2Diags.upLeft;
-            rayCount = 4;
-        }
-        else
-        {
-            rayCount = 0;
-        }
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
-    }
-
-    void RaycastCollisions(ref Vector2 velocity)
-    {
-        float directionX = Mathf.Sign(velocity.x); ;
-        float directionY = Mathf.Sign(velocity.y); ;
-
-        rayLength = (Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y)) ? Mathf.Abs(velocity.x) : Mathf.Abs(velocity.y);
- 
-        for (int i = 0; i < rayCount; i++)
-        {
-            Debug.DrawRay(rayOrigin, rayDirection, Color.red);
-
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, rayLength, collisionMask);
             if (hit)
             {
-      
-                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-                Debug.Log(slopeAngle);
-                velocity.x = 0;
                 velocity.y = 0;
+
+                //velocity.y = (hit.distance - skinWidth) * directionY;
+                
                 rayLength = hit.distance;
+
+                collisionInfo.below = directionY == -1;
+                collisionInfo.above = directionY == 1;
+
             }
-
-            SetNextRay(i);
         }
-
     }
 
-    void SetNextRay(int i)
+    void HorizontalCollisions(ref Vector2 velocity)
     {
-        if(i == 1)
-        {
-            if(rayDirection == v2Diags.downLeft)
-            {
-                rayDirection = v2Diags.upLeft;
-            }
-            else if(rayDirection == v2Diags.upLeft)
-            {
-                rayDirection = v2Diags.upRight;
-            }
-            else if (rayDirection == v2Diags.upRight)
-            {
-                rayDirection = v2Diags.downRight;
-            }
-            else if (rayDirection == v2Diags.downRight)
-            {
-                rayDirection = v2Diags.downLeft;
-            }
-        }
-        else
-        {
-            if (rayOrigin == raycastOrigins.midBot)
-            {
-                rayOrigin = raycastOrigins.midLeft;
-            }
-            else if (rayOrigin == raycastOrigins.midLeft)
-            {
-                rayOrigin = raycastOrigins.midTop;
-            }
-            else if (rayOrigin == raycastOrigins.midTop)
-            {
-                rayOrigin = raycastOrigins.midRight;
-            }
-            else if (rayOrigin == raycastOrigins.midRight)
-            {
-                rayOrigin = raycastOrigins.midBot;
-            }
-        }
+        float directionX = Mathf.Sign(velocity.x);
+        float rayLength = Mathf.Abs(velocity.x * 10) + skinWidth;
 
-        
+        for (int i = 0; i < horizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.botLeft : raycastOrigins.botRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
+
+            if (hit)
+            {
+                velocity.x = 0;
+                //velocity.x = (hit.distance - skinWidth) * directionX;
+                rayLength = hit.distance;
+
+                collisionInfo.left = directionX == -1;
+                collisionInfo.right = directionX == 1;
+            }
+
+        }
     }
 
     void UpdateRaycastOrigins()
     {
-        
-        //gets the size of our collider
-        Bounds bounds = polyCollider.bounds;
-        bounds.Expand(.035f);
+        Bounds bounds = boxCollider.bounds;
+        bounds.Expand(skinWidth * -2);
 
-        //find the mid points of collider bounds
-        raycastOrigins.midBot = new Vector2(bounds.max.x + ((bounds.min.x - bounds.max.x) /2), bounds.min.y);
-        raycastOrigins.midTop = new Vector2(bounds.max.x + ((bounds.min.x - bounds.max.x) / 2), bounds.max.y);
-        raycastOrigins.midRight = new Vector2(bounds.max.x, bounds.max.y + ((bounds.min.y - bounds.max.y) / 2));
-        raycastOrigins.midLeft = new Vector2(bounds.min.x, bounds.max.y + ((bounds.min.y - bounds.max.y) / 2));
+        raycastOrigins.botLeft = new Vector2(bounds.min.x, bounds.min.y);
+        raycastOrigins.botRight = new Vector2(bounds.max.x, bounds.min.y);
+        raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
+        raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
 
-        /*
-        Debug.DrawRay(raycastOrigins.botLeft, Vector2.up, Color.green);
-        Debug.DrawRay(raycastOrigins.topLeft, Vector2.right, Color.green);
-        Debug.DrawRay(raycastOrigins.topRight, Vector2.down, Color.green);
-        Debug.DrawRay(raycastOrigins.botRight, Vector2.left, Color.green);
-        */
     }
 
+    void CalcuclateRaySpacing()
+    {
+        Bounds bounds = boxCollider.bounds;
+        bounds.Expand(skinWidth * -2);
 
-    //box collider co-ordinates
+        horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
+        verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
+
+        horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
+        verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
+    }
+
     struct RaycastOrigins
     {
-        public Vector2 midBot, midTop, midLeft, midRight;
-
+        public Vector2 topLeft, topRight, botLeft, botRight;
     }
 
-    struct Vector2Diagonals
+    public struct CollisionInfo
     {
-        public Vector2 upLeft, upRight, downLeft, downRight;
-    }
+        public bool above, below, left, right;
 
+        public void Reset() 
+        {
+            above = below = left = right = false;
+        }
+    }
 
 }
