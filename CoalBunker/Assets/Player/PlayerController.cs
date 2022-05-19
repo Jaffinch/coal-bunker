@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour
     Vector2 velocity;
     private float moveSpeed = 3f;
 
-
-    //physics scripts
+ 
     Controller2D controller;
     Animator anim;
 
     private void Start()
     {
+
         controller = GetComponent<Controller2D>();
         anim = GetComponent<Animator>();
     }
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
 
         controller.Move(velocity * Time.deltaTime);
+
 
     }
 

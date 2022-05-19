@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Controller2D : MonoBehaviour
 {
+
+
     BoxCollider2D boxCollider;
 
     public IsoPlayerController isoController;
@@ -55,11 +57,15 @@ public class Controller2D : MonoBehaviour
             velocity.x /= 1.5f;
         }
 
+        velocity = Quaternion.Euler(0, 0, -45f) * velocity;
 
         isoController.IsometricMove(velocity);
         
+
         transform.Translate(velocity);
     }
+
+
 
     void VerticalCollisions(ref Vector2 velocity)
     {

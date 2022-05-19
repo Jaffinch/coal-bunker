@@ -9,6 +9,8 @@ public class IsoPlayerController : MonoBehaviour
 
     private Animator anim;
 
+
+
     private float directionX;
     private float directionY;
     private float prevX;
@@ -39,8 +41,10 @@ public class IsoPlayerController : MonoBehaviour
         transform.Translate(isometric);
     }
 
-    private void LateUpdate()
+    void Update()
     {
+
+
         if(directionX == 0 && directionY == 0)
         {
             anim.SetFloat("PosX", prevX);
