@@ -6,53 +6,13 @@ using UnityEngine.InputSystem;
 [RequireComponent (typeof (Controller2D))]
 public class PlayerController : MonoBehaviour
 {
-    Vector2 velocity;
-    private float moveSpeed = 3f;
+    private float moveSpeed = 1f;
+    private float directionX;
+    private float directionY;
 
- 
-    Controller2D controller;
-    Animator anim;
-
-    private void Start()
+    private void LateUpdate()
     {
-
-        controller = GetComponent<Controller2D>();
-        anim = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-
-        controller.Move(velocity * Time.deltaTime);
-
-
-    }
-
-   private void LateUpdate()
-    {
-        Vector2 inputDirection = value.ReadValue<Vector2>();
-        velocity.x = inputDirection.x * moveSpeed;
-        velocity.y = inputDirection.y * moveSpeed;
-
-    }
-
-
-    /*private void LateUpdate()
-    {
-        if(directionX == 0 && directionY == 0)
-        {
-            anim.SetFloat("PosX", prevX);
-            anim.SetFloat("PosY", prevY);
-        }
-        else
-        {
-            anim.SetFloat("PosX", directionX);
-            anim.SetFloat("PosY", directionY);
-            prevX = directionX;
-            prevY = directionY;
-
-        }
-        
+        transform.Translate(directionX * moveSpeed * Time.deltaTime, directionY * moveSpeed * Time.deltaTime, 0);
     }
 
     public void Move(InputAction.CallbackContext value)
@@ -62,5 +22,4 @@ public class PlayerController : MonoBehaviour
         directionX =  moveDirection.x;
         directionY =  moveDirection.y;
     }
-    
 }
