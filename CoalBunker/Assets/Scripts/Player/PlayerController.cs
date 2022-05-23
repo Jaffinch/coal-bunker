@@ -28,9 +28,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
-
-    public void GetMovementInput(InputAction.CallbackContext value)
+   private void LateUpdate()
     {
         Vector2 inputDirection = value.ReadValue<Vector2>();
         velocity.x = inputDirection.x * moveSpeed;
@@ -55,8 +53,14 @@ public class PlayerController : MonoBehaviour
 
         }
         
-    }*/
+    }
 
+    public void Move(InputAction.CallbackContext value)
+    {
+        Vector2 moveDirection = value.ReadValue<Vector2>();
 
-
+        directionX =  moveDirection.x;
+        directionY =  moveDirection.y;
+    }
+    
 }
