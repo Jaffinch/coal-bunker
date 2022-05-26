@@ -13,8 +13,6 @@ public class TopDownController : MonoBehaviour
 
     public float walkSpeed;
 
-    private float directionX;
-    private float directionY;
     private float prevX;
     private float prevY;
 
@@ -24,9 +22,11 @@ public class TopDownController : MonoBehaviour
 
         rb.velocity = velocity * Time.deltaTime;
 
-        directionX = velocity.x;
-        directionY = velocity.y;
+        Animate(velocity.x, velocity.y);
+    }
 
+    private void Animate(float directionX, float directionY)
+    {
         if (directionX == 0 && directionY == 0)
         {
             anim.SetFloat("PosX", prevX);
@@ -45,21 +45,22 @@ public class TopDownController : MonoBehaviour
     public void GetMovementInput(InputAction.CallbackContext value)
     {
         Vector2 inputDirection =  value.ReadValue<Vector2>();
+
         if(inputDirection.y == 0)
         {
-            velocity.x = inputDirection.x * walkSpeed/2;
+            velocity.x = inputDirection.x * walkSpeed * .75f;
             velocity.y = 0;
  
         }
         else if(inputDirection.x == 0)
         {
             velocity.x = 0;
-            velocity.y = inputDirection.y * walkSpeed / 2;
+            velocity.y = inputDirection.y * walkSpeed * .75f;
         }
         else
         {
-            velocity.x = inputDirection.x * walkSpeed / 2;
-            velocity.y = inputDirection.y * walkSpeed / 4;
+            velocity.x = inputDirection.x * walkSpeed;
+            velocity.y = inputDirection.y * walkSpeed / 2;
         }
 
     }
