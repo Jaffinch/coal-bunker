@@ -132,13 +132,13 @@ public class WallMaskController : MonoBehaviour
 
     void SetCheckTiles(Vector3Int lPos)
     {
-        //left tile
+        //Mid Tile
         prevCheckTiles[0] = checkTiles[0];
-        //middle tile
+        //left tile
         prevCheckTiles[1] = checkTiles[1];
         //right tile
         prevCheckTiles[2] = checkTiles[2];
-        checkTiles[0] = new Vector3Int(lPos.x -1 , lPos.y -1 , 0);
+        checkTiles[0] = new Vector3Int(lPos.x - 1 , lPos.y -1 , 0);
         checkTiles[1] = new Vector3Int(lPos.x - 1, lPos.y, 0);
         checkTiles[2] = new Vector3Int(lPos.x, lPos.y - 1, 0);
 
