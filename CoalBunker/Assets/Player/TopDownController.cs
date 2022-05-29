@@ -11,6 +11,7 @@ public class TopDownController : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
 
+
     public float walkSpeed;
 
     private float prevX;
@@ -22,8 +23,12 @@ public class TopDownController : MonoBehaviour
 
         rb.velocity = velocity * Time.deltaTime;
 
+
+
         Animate(velocity.x, velocity.y);
     }
+
+  
 
     private void Animate(float directionX, float directionY)
     {
@@ -48,14 +53,14 @@ public class TopDownController : MonoBehaviour
 
         if(inputDirection.y == 0)
         {
-            velocity.x = inputDirection.x * walkSpeed * .75f;
+            velocity.x = inputDirection.x * walkSpeed;
             velocity.y = 0;
  
         }
         else if(inputDirection.x == 0)
         {
             velocity.x = 0;
-            velocity.y = inputDirection.y * walkSpeed * .75f;
+            velocity.y = inputDirection.y * walkSpeed;
         }
         else
         {

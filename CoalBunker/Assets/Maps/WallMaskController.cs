@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,13 +6,9 @@ using UnityEngine.Tilemaps;
 
 public class WallMaskController : MonoBehaviour
 {
- 
-    public Dictionary<TileBase, TileBase> tileDictionary = new Dictionary<TileBase, TileBase>();
-    public Dictionary<TileBase, TileBase> tileDictionary2 = new Dictionary<TileBase, TileBase>();
-    Tilemap map;
+    public Tilemap map;
     public GameObject player;
-    public TileBase[] NormalTiles;
-    public TileBase[] TransTiles;
+    
     public Vector3Int[] checkTiles = new Vector3Int[3];
     public Vector3Int[] prevCheckTiles = new Vector3Int[3];
 
@@ -28,37 +22,30 @@ public class WallMaskController : MonoBehaviour
     public TileBase transPilTile;
     public TileBase transCorTile;
 
-    private TileBase tile;
 
-    private void Start()
-    {
-        map = GetComponent<Tilemap>();
 
-        for (int i = 0; i < NormalTiles.Length; i++)
-        {
-            tileDictionary.Add(NormalTiles[i], TransTiles[i]);
-            tileDictionary2.Add(TransTiles[i], NormalTiles[i]);
-        }
-    }
+
 
     private void Update()
     {
-        //GridLayout gridLayout = transform.parent.GetComponentInParent<GridLayout>();
-        //Vector3Int cellPosition = gridLayout.WorldToCell(player.transform.position);
-        //map.SetTile(cellPosition, transparent);
-        
-        Vector3Int lPos = map.WorldToCell(player.transform.position);
-        // map.SetTile(lPos, transparent);
+        Vector3 pos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
+
+        Vector3Int lPos = map.WorldToCell(pos);
 
         SetCheckTiles(lPos);
 
-
+        //left tile
         if (map.GetTile(checkTiles[1]) == leftTile)
         {
             map.SetTile(checkTiles[1], transLeftTile);
         }
-        
-        if(map.GetTile(checkTiles[0]) == leftTile)
+        else if (map.GetTile(checkTiles[1]) == corTile)
+        {
+            map.SetTile(checkTiles[1], transCorTile);
+        }
+
+        //mid tile
+        if (map.GetTile(checkTiles[0]) == leftTile)
         {
             map.SetTile(checkTiles[0], transLeftTile);
         }
@@ -75,12 +62,17 @@ public class WallMaskController : MonoBehaviour
             map.SetTile(checkTiles[0], transCorTile);
         }
 
+        //right tile
         if(map.GetTile(checkTiles[2]) == rightTile)
         {
             map.SetTile(checkTiles[2], transRightTile);
         }
+        else if (map.GetTile(checkTiles[2]) == corTile)
+        {
+            map.SetTile(checkTiles[2], transCorTile);
+        }
 
-
+        //change tile back
         for (int i = 0; i < prevCheckTiles.Length; i++)
         {
             if (!checkTiles.Contains(prevCheckTiles[i]))
@@ -104,8 +96,6 @@ public class WallMaskController : MonoBehaviour
             }
 
         }
-        
-
 
 
         /*     for (int i = 0; i < checkTiles.Length; i++)
@@ -124,11 +114,8 @@ public class WallMaskController : MonoBehaviour
              prevCheckTiles[i] = checkTiles[i];
          }
          */
-
-
-
-        Debug.Log(lPos);
     }
+
 
     void SetCheckTiles(Vector3Int lPos)
     {
@@ -138,9 +125,11 @@ public class WallMaskController : MonoBehaviour
         prevCheckTiles[1] = checkTiles[1];
         //right tile
         prevCheckTiles[2] = checkTiles[2];
-        checkTiles[0] = new Vector3Int(lPos.x - 1 , lPos.y -1 , 0);
-        checkTiles[1] = new Vector3Int(lPos.x - 1, lPos.y, 0);
-        checkTiles[2] = new Vector3Int(lPos.x, lPos.y - 1, 0);
+        checkTiles[0] = new Vector3Int(lPos.x - 1, lPos.y - 1, 0);
+        checkTiles[1] = new Vector3Int(lPos.x, lPos.y - 1, 0);
+        checkTiles[2] = new Vector3Int(lPos.x - 1, lPos.y, 0);
+
+        Debug.Log(lPos);
 
     }
 

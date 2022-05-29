@@ -1,34 +1,19 @@
 fileFormatVersion: 2
-guid: 25fec58b66963204892c785a209d307b
+guid: 4ab4364f643fca24b8d4e57faa860da3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7153300517673038136
-    second: playerW_0
+      213: -1148966877712973093
+    second: IsometricTransparentWalls_0
   - first:
-      213: -3758647513899635474
-    second: playerW_1
+      213: 2221400918087795698
+    second: IsometricTransparentWalls_1
   - first:
-      213: 3935728416239239283
-    second: playerW_2
+      213: 1185040029851392525
+    second: IsometricTransparentWalls_2
   - first:
-      213: 8162006987102536588
-    second: playerW_3
-  - first:
-      213: -5869523273991924407
-    second: playerW_4
-  - first:
-      213: -396371233013317103
-    second: playerW_5
-  - first:
-      213: -5224548547090819739
-    second: playerW_6
-  - first:
-      213: -1380643019483048088
-    second: playerW_7
-  - first:
-      213: 8542267281415174267
-    second: playerW_8
+      213: 6868200008808346863
+    second: IsometricTransparentWalls_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,190 +115,103 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: playerW_0
+      name: IsometricTransparentWalls_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -25, y: -21}
+        - {x: -32, y: -16}
+        - {x: -1, y: 0}
+        - {x: 8, y: -4}
       tessellationDetail: 0
       bones: []
-      spriteID: 8ce0b78341f5abc90800000000000000
-      internalID: -7153300517673038136
+      spriteID: bd28a3356bc0e00f0800000000000000
+      internalID: -1148966877712973093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerW_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eec6b12100a96dbc0800000000000000
-      internalID: -3758647513899635474
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerW_2
+      name: IsometricTransparentWalls_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 25, y: -21}
+        - {x: -8, y: -4}
+        - {x: 0, y: 0}
+        - {x: 32, y: -16}
       tessellationDetail: 0
       bones: []
-      spriteID: 370c95664248e9630800000000000000
-      internalID: 3935728416239239283
+      spriteID: 2f389529d5004de10800000000000000
+      internalID: 2221400918087795698
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerW_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c83c0805c16454170800000000000000
-      internalID: 8162006987102536588
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerW_4
+      name: IsometricTransparentWalls_2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 1, y: -10}
+        - {x: -7, y: -5}
+        - {x: 1, y: -1}
+        - {x: 8, y: -5}
       tessellationDetail: 0
       bones: []
-      spriteID: 945d2dc2ea34b8ea0800000000000000
-      internalID: -5869523273991924407
+      spriteID: d0a19e7e0ab127010800000000000000
+      internalID: 1185040029851392525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerW_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 112ce01b67ecf7af0800000000000000
-      internalID: -396371233013317103
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerW_6
+      name: IsometricTransparentWalls_3
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -25, y: -21}
+        - {x: -32, y: -16}
+        - {x: 0, y: 0}
+        - {x: 32, y: -15}
+        - {x: 25, y: -21}
+        - {x: 0, y: -8}
       tessellationDetail: 0
       bones: []
-      spriteID: 5655edaf6ccae77b0800000000000000
-      internalID: -5224548547090819739
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerW_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 867171e1d78f6dce0800000000000000
-      internalID: -1380643019483048088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: playerW_8
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b78713565da3c8670800000000000000
-      internalID: 8542267281415174267
+      spriteID: fe43b5bc48fb05f50800000000000000
+      internalID: 6868200008808346863
       vertices: []
       indices: 
       edges: []

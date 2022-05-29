@@ -29,6 +29,81 @@ TextureImporter:
   - first:
       213: -6757013684619098713
     second: BasicIsometricShapes_8
+  - first:
+      213: -8792812561621933144
+    second: BasicIsometricShapes_9
+  - first:
+      213: 1356315600348115321
+    second: BasicIsometricShapes_10
+  - first:
+      213: -5714667112488993694
+    second: BasicIsometricShapes_11
+  - first:
+      213: 8692830447487289520
+    second: BasicIsometricShapes_12
+  - first:
+      213: -8724250585580038894
+    second: BasicIsometricShapes_13
+  - first:
+      213: -3565550198222326703
+    second: BasicIsometricShapes_14
+  - first:
+      213: 8241403951873671309
+    second: BasicIsometricShapes_15
+  - first:
+      213: -2637087876034959576
+    second: BasicIsometricShapes_16
+  - first:
+      213: 10178534674707239
+    second: BasicIsometricShapes_17
+  - first:
+      213: 351253802670542231
+    second: BasicIsometricShapes_18
+  - first:
+      213: -8289083804477591237
+    second: BasicIsometricShapes_19
+  - first:
+      213: -926192468397107689
+    second: BasicIsometricShapes_20
+  - first:
+      213: -5592908042246103915
+    second: BasicIsometricShapes_21
+  - first:
+      213: 3720232916559422578
+    second: BasicIsometricShapes_22
+  - first:
+      213: -6342157579326677063
+    second: BasicIsometricShapes_23
+  - first:
+      213: 7026905477570399066
+    second: BasicIsometricShapes_24
+  - first:
+      213: -3789169457907601906
+    second: BasicIsometricShapes_25
+  - first:
+      213: -3642471694491454667
+    second: BasicIsometricShapes_26
+  - first:
+      213: 1547239911179897047
+    second: BasicIsometricShapes_27
+  - first:
+      213: -5059039682787330842
+    second: BasicIsometricShapes_28
+  - first:
+      213: -4100609753445051893
+    second: BasicIsometricShapes_29
+  - first:
+      213: 5202831937717978084
+    second: BasicIsometricShapes_30
+  - first:
+      213: -4658087892780575175
+    second: BasicIsometricShapes_31
+  - first:
+      213: -3254742000372210903
+    second: BasicIsometricShapes_32
+  - first:
+      213: 6321422637224604565
+    second: BasicIsometricShapes_33
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -138,7 +213,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -159,7 +234,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -184,7 +259,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -209,7 +284,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -234,7 +309,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -262,7 +337,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -287,7 +362,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -312,7 +387,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
@@ -337,7 +412,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
