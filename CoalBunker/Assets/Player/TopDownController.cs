@@ -11,6 +11,7 @@ public class TopDownController : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
 
+    public bool isAttacking;
 
     public float walkSpeed;
 
@@ -18,14 +19,29 @@ public class TopDownController : MonoBehaviour
     private float prevY;
 
 
+    private void Start()
+    {
+        isAttacking = false;    
+    }
+
     private void FixedUpdate()
     {
 
-        rb.velocity = velocity * Time.deltaTime;
+        if (!isAttacking) 
+        {
+            anim.SetBool("isAttacking", false);
+            rb.velocity = velocity * Time.deltaTime;
+            Animate(velocity.x, velocity.y);
+        }
+        else
+        {
+            anim.SetBool("isAttacking", isAttacking);
+            anim.SetFloat("PosX", prevX);
+            anim.SetFloat("PosY", prevY);
+        }
 
 
-
-        Animate(velocity.x, velocity.y);
+        
     }
 
   
@@ -34,11 +50,14 @@ public class TopDownController : MonoBehaviour
     {
         if (directionX == 0 && directionY == 0)
         {
+            anim.SetBool("isMoving", false);
             anim.SetFloat("PosX", prevX);
             anim.SetFloat("PosY", prevY);
+
         }
         else
-        {
+        { 
+            anim.SetBool("isMoving", true);
             anim.SetFloat("PosX", directionX);
             anim.SetFloat("PosY", directionY);
             prevX = directionX;
@@ -68,6 +87,16 @@ public class TopDownController : MonoBehaviour
             velocity.y = inputDirection.y * walkSpeed / 2;
         }
 
+    }
+
+    public void GetAttackInput(InputAction.CallbackContext value)
+    {
+        isAttacking = true;
+    }
+
+    public void EndAttackAnimation()
+    {
+        isAttacking = false;
     }
 
 }
