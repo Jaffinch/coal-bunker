@@ -17,11 +17,13 @@ public class SortOrderController : MonoBehaviour
         Vector3 tileworldpos = g.CellToWorld(tilepos);
         relativePos = pos - tileworldpos;
 
-        if (relativePos.y < .06)
+        Debug.Log(relativePos);
+
+        if (relativePos.y < .12)
             transform.position = new Vector3(transform.position.x, transform.position.y, 2);
-        else if (relativePos.y < .25)
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+        //else if (relativePos.y < .25)
+        //    transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         else
-            transform.position = new Vector3(transform.position.x, transform.position.y, 2);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
     }
 }

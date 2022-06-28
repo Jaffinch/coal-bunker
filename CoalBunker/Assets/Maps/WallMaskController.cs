@@ -129,8 +129,6 @@ public class WallMaskController : MonoBehaviour
         checkTiles[1] = new Vector3Int(lPos.x, lPos.y - 1, 0);
         checkTiles[2] = new Vector3Int(lPos.x - 1, lPos.y, 0);
 
-        Debug.Log(lPos);
-
     }
 
 
