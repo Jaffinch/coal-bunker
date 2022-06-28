@@ -17,6 +17,93 @@ TextureImporter:
   - first:
       213: -1057672369161648850
     second: BasicIsometricShapes_4
+  - first:
+      213: -2465171222098388005
+    second: BasicIsometricShapes_5
+  - first:
+      213: -9101309663415132580
+    second: BasicIsometricShapes_6
+  - first:
+      213: 2855128722289571741
+    second: BasicIsometricShapes_7
+  - first:
+      213: -6757013684619098713
+    second: BasicIsometricShapes_8
+  - first:
+      213: -8792812561621933144
+    second: BasicIsometricShapes_9
+  - first:
+      213: 1356315600348115321
+    second: BasicIsometricShapes_10
+  - first:
+      213: -5714667112488993694
+    second: BasicIsometricShapes_11
+  - first:
+      213: 8692830447487289520
+    second: BasicIsometricShapes_12
+  - first:
+      213: -8724250585580038894
+    second: BasicIsometricShapes_13
+  - first:
+      213: -3565550198222326703
+    second: BasicIsometricShapes_14
+  - first:
+      213: 8241403951873671309
+    second: BasicIsometricShapes_15
+  - first:
+      213: -2637087876034959576
+    second: BasicIsometricShapes_16
+  - first:
+      213: 10178534674707239
+    second: BasicIsometricShapes_17
+  - first:
+      213: 351253802670542231
+    second: BasicIsometricShapes_18
+  - first:
+      213: -8289083804477591237
+    second: BasicIsometricShapes_19
+  - first:
+      213: -926192468397107689
+    second: BasicIsometricShapes_20
+  - first:
+      213: -5592908042246103915
+    second: BasicIsometricShapes_21
+  - first:
+      213: 3720232916559422578
+    second: BasicIsometricShapes_22
+  - first:
+      213: -6342157579326677063
+    second: BasicIsometricShapes_23
+  - first:
+      213: 7026905477570399066
+    second: BasicIsometricShapes_24
+  - first:
+      213: -3789169457907601906
+    second: BasicIsometricShapes_25
+  - first:
+      213: -3642471694491454667
+    second: BasicIsometricShapes_26
+  - first:
+      213: 1547239911179897047
+    second: BasicIsometricShapes_27
+  - first:
+      213: -5059039682787330842
+    second: BasicIsometricShapes_28
+  - first:
+      213: -4100609753445051893
+    second: BasicIsometricShapes_29
+  - first:
+      213: 5202831937717978084
+    second: BasicIsometricShapes_30
+  - first:
+      213: -4658087892780575175
+    second: BasicIsometricShapes_31
+  - first:
+      213: -3254742000372210903
+    second: BasicIsometricShapes_32
+  - first:
+      213: 6321422637224604565
+    second: BasicIsometricShapes_33
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -61,9 +148,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -150,7 +237,11 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -25, y: -20}
+        - {x: -32, y: -16}
+        - {x: -1, y: 1}
+        - {x: 8, y: -3}
       tessellationDetail: 0
       bones: []
       spriteID: 9129aafcec5b31c40800000000000000
@@ -171,7 +262,11 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -7, y: -3}
+        - {x: 0, y: 0}
+        - {x: 31, y: -17}
+        - {x: 24, y: -20}
       tessellationDetail: 0
       bones: []
       spriteID: 039660714401f1e30800000000000000
@@ -192,7 +287,11 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -7, y: -4}
+        - {x: 0, y: 1}
+        - {x: 8, y: -4}
+        - {x: 0, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: db558b4c87803a280800000000000000
@@ -213,11 +312,120 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -25, y: -19}
+        - {x: -32, y: -16}
+        - {x: -6, y: 0}
+        - {x: 4, y: 0}
+        - {x: 31, y: -16}
+        - {x: 24, y: -19}
+        - {x: 0, y: -7}
       tessellationDetail: 0
       bones: []
       spriteID: e25cf5385946251f0800000000000000
       internalID: -1057672369161648850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BasicIsometricShapes_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 232
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -25, y: -20}
+        - {x: -32, y: -15}
+        - {x: -1, y: 1}
+        - {x: 8, y: -3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdb5f44a5d3f9cdd0800000000000000
+      internalID: -2465171222098388005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BasicIsometricShapes_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 232
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -7, y: -3}
+        - {x: 0, y: 1}
+        - {x: 32, y: -16}
+        - {x: 25, y: -20}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5e9f49f417a1b180800000000000000
+      internalID: -9101309663415132580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BasicIsometricShapes_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 232
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -4}
+        - {x: 0, y: 0}
+        - {x: 10, y: -4}
+        - {x: 0, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d97b51022747f9720800000000000000
+      internalID: 2855128722289571741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BasicIsometricShapes_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 232
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -25, y: -19}
+        - {x: -31, y: -16}
+        - {x: -1, y: 1}
+        - {x: 31, y: -15}
+        - {x: 25, y: -19}
+        - {x: 0, y: -7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a543d1aad34a32a0800000000000000
+      internalID: -6757013684619098713
       vertices: []
       indices: 
       edges: []
